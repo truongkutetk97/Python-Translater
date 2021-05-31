@@ -7,7 +7,8 @@ from time import sleep
 import sys
 
 
-SW_VERSION="0.1.0"
+
+SW_VERSION="0.1.1"
 LOWER_TIMEOUT=0.1
 UPPER_TIMEOUT=0.4
 checkTime = 0
@@ -40,7 +41,10 @@ def on_press(key):
             pya.hotkey('ctrl', 'c')
             time.sleep(.1)  
             clipBoard = pyperclip.paste()
-            print('{}'.format(transl(clipBoard) )) 
+            if not clipBoard.isspace():
+                print('{}'.format(transl(clipBoard) )) 
+            else: 
+                return True
             print("---------------------------------------------------------")
             checkTime = 0
         elif round(time.time(),2) - checkTime > UPPER_TIMEOUT:
